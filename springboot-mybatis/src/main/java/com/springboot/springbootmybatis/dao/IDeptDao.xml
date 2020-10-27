@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.springbootmybatis.dao.IDeptDao">
+   <resultMap id="dept" type="com.springboot.springbootmybatis.entity.Dept">
+       <id property="deptno" column="deptno"></id>
+       <result property="dname" column="dname"></result>
+       <result property="loc" column="loc"></result>
+   </resultMap>
+    <select id="selectDeptList" parameterType="Dept" resultType="dept">
+          select * from dept
+    </select>
+    <select id="selectDeptById" parameterType="int" resultMap="dept">
+        select * from dept where deptno=#{deptno}
+    </select>
+    <insert id="insertDept" parameterType="Dept">
+        insert into dept values(#{deptno},#{dname},#{loc})
+    </insert>
+    <update id="updateDept" parameterType="Dept">
+        update dept set dname=#{dname},loc=#{loc} where deptno=#{deptno}
+    </update>
+    <delete id="deleteDeptById" parameterType="int">
+          delete from dept where deptno=#{deptno}
+    </delete>
+</mapper>

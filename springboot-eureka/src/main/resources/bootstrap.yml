@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: springboot-eureka   #应用名称
+server:
+  port: 8260
+info:
+  name: springboot-eureka
+
+eureka:   #注册中心
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true  #以IP地址注册到服务中心，相互注册使用IP地址
+    leaseRenewalIntervalInSeconds: 3 #加速心跳
+    ip-address: localhost
+    health-check-url-path: /actuator/health
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    registryFetchIntervalSeconds: 5 #eureka client间隔多久去拉取服务注册信息，默认为30秒,缩小间隔为5秒
+    instanceInfoReplicationIntervalSeconds: 5 #eureka client 启动之后每隔5s 向server发送配置信息
+    initialInstanceInfoReplicationIntervalSeconds: 5 #eureka client启动后5s后向server发送
+    serviceUrl:
+      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/

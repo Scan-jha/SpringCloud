@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.springbootmybatis.dao.IEmpDao">
+    <resultMap id="emp" type="com.springboot.springbootmybatis.entity.Emp">
+        <id property="empno" column="empno"></id>
+        <result property="ename" column="ename"></result>
+        <result property="job" column="job"></result>
+        <result property="mgr" column="mgr"></result>
+        <result property="hiredate" column="hiredate"></result>
+        <result property="sal" column="sal"></result>
+        <result property="comm" column="comm"></result>
+        <association property="deptno" javaType="com.springboot.springbootmybatis.entity.Dept">
+            <id property="deptno" column="deptno"></id>
+            <result property="dname" column="dname"></result>
+            <result property="loc" column="loc"></result>
+        </association>
+    </resultMap>
+    <select id="allEmp" resultMap="emp" parameterType="Emp">
+        select * from dept inner join emp on dept.deptno=emp.deptno
+    </select>
+</mapper>

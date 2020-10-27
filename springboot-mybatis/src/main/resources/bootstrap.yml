@@ -1,0 +1,32 @@
+server:
+  port: 8098
+spring:
+  application:
+    name: springboot-mybatis  #应用名称
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/ORCL
+    username: scott
+    password: oracle11g
+  profiles:
+    active: dev   #表示当前的测试坏境
+mybatis:
+  mapper-locations: classpath:com/springboot/springbootmybatis/dao/*.xml
+  config-location=classpath: classpath:mybatis-config.xml
+  type-aliases-package: com.springboot.springbootmybatis.entity
+---
+spring:
+  profiles: dev
+eureka:    #往注册中心eureka server注册自己的Ip
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: localhost
+    health-check-url-path: /actuator/health
+  client:
+    registryFetchIntervalSeconds: 5 #eureka client间隔多久去拉取服务注册信息，默认为30秒,缩小间隔为5秒
+    instanceInfoReplicationIntervalSeconds: 5 #eureka client 启动之后每隔5s 向server发送配置信息
+    initialInstanceInfoReplicationIntervalSeconds: 5 #eureka client启动后5s后向server发送
+    serviceUrl:
+      defaultZone: http://localhost:8260/eureka/

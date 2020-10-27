@@ -1,0 +1,28 @@
+server:
+  port: 8064  #\u7AEF\u53E3\u53F7
+spring:
+  application:
+    name: srpingboot-gateway  #\u9879\u76EE\u540D\u79F0
+  cloud:   #Gateway\u7F51\u5173\u914D\u7F6E
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # \u662F\u5426\u548C\u670D\u52A1\u6CE8\u518C\u4E0E\u53D1\u73B0\u7EC4\u4EF6\u7ED3\u5408\uFF0C\u8BBE\u7F6E\u4E3A true \u540E\u53EF\u4EE5\u76F4\u63A5\u4F7F\u7528\u5E94\u7528\u540D\u79F0\u8C03\u7528\u670D\u52A1
+      routes:
+        - id: gateway_service    #\u81EA\u5B9A\u4E49\u8DEF\u7531ID
+          uri: lb://springboot-mybatis  #\u76EE\u6807\u670D\u52A1\u5730\u5740\uFF0Cspringboot-mybatis\u670D\u52A1\u540D\u79F0
+          predicates:  #\u65AD\u8A00
+            - Path=/**   #Path\u5339\u914D\u89C4\u5219
+eureka:    #\u5F80\u6CE8\u518C\u4E2D\u5FC3eureka server\u6CE8\u518C\u81EA\u5DF1\u7684Ip
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: localhost
+    health-check-url-path: /actuator/health
+  client:
+    registryFetchIntervalSeconds: 5 #eureka client\u95F4\u9694\u591A\u4E45\u53BB\u62C9\u53D6\u670D\u52A1\u6CE8\u518C\u4FE1\u606F\uFF0C\u9ED8\u8BA4\u4E3A30\u79D2,\u7F29\u5C0F\u95F4\u9694\u4E3A5\u79D2
+    instanceInfoReplicationIntervalSeconds: 5 #eureka client \u542F\u52A8\u4E4B\u540E\u6BCF\u96945s \u5411server\u53D1\u9001\u914D\u7F6E\u4FE1\u606F
+    initialInstanceInfoReplicationIntervalSeconds: 5 #eureka client\u542F\u52A8\u540E5s\u540E\u5411server\u53D1\u9001
+    serviceUrl:
+      defaultZone: http://localhost:8260/eureka/
