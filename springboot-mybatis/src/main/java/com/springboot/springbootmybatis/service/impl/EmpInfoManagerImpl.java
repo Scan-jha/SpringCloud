@@ -12,16 +12,7 @@ public class EmpInfoManagerImpl implements IEmpInfoManager {
     @Autowired
     private IEmpDao iEmpDao;
 
-    public IEmpDao getiEmpDao() {
-        return iEmpDao;
-    }
-
-    public void setiEmpDao(IEmpDao iEmpDao) {
-        this.iEmpDao = iEmpDao;
-    }
-
-    @Override
     public List<Emp> allEmp(Emp emp) {
-        return this.getiEmpDao().allEmp(emp);
+        return this.iEmpDao.allEmp(emp);
     }
 }
