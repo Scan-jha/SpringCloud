@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class ComputeService {
     @Autowired
@@ -17,5 +19,9 @@ public class ComputeService {
     }
     public String serviceFallback(){
         return "error";
+    }
+
+    public String selectAllEmp() {
+        return restTemplate.getForEntity("http://springboot-mybatis/emp/all",String.class).getBody();
     }
 }

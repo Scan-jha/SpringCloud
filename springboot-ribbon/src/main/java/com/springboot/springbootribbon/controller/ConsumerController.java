@@ -13,4 +13,9 @@ public class ConsumerController {
     public String selectDeptList(){
         return computeService.selectDeptList();
     }
+
+    @GetMapping("/emp/all")
+    public String selectAllEmp(){
+        return computeService.selectAllEmp();
+    }
 }
