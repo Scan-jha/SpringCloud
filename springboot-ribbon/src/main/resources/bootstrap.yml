@@ -1,29 +1,20 @@
 server:
-  port: 8098
+  port: 8093
 spring:
   application:
-    name: springboot-mybatis  #应用名称
+    name: springboot-ribbon  #应用名称
   profiles:
     active: dev
-  datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521/ORCL
-    username: scott
-    password: oracle11g
-mybatis:  #mybatis
-  mapper-locations: classpath:com/springboot/springbootmybatis/dao/*.xml
-  config-location=classpath: classpath:mybatis-config.xml
-  type-aliases-package: com.springboot.springbootmybatis.entity
 ---
 spring:
   profiles: dev
-eureka:    #往注册中心eureka server注册自己的Ip
+eureka:   #注册服务
   instance:
     lease-renewal-interval-in-seconds: 10
     prefer-ip-address: true
-    instance-id: springboot-mybatis:${server.port}
+    instance-id: springboot-ribbon:${server.port}
     ip-address: localhost
-    health-check-url-path: /actuator/health  #健康检测
+    health-check-url-path: /actuator/health
   client:
     registryFetchIntervalSeconds: 5 #eureka client间隔多久去拉取服务注册信息，默认为30秒,缩小间隔为5秒
     instanceInfoReplicationIntervalSeconds: 5 #eureka client 启动之后每隔5s 向server发送配置信息

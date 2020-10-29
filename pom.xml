@@ -19,6 +19,7 @@
     <modules>
         <module>springboot-mybatis</module>
         <module>springboot-eureka</module>
+        <module>springboot-ribbon</module>
         <module>springboot-gateway</module>
     </modules>
 

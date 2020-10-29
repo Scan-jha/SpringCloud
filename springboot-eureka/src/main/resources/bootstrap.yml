@@ -1,18 +1,20 @@
+server:
+  port: 8260
 spring:
   application:
     name: springboot-eureka   #应用名称
-server:
-  port: 8260
-info:
-  name: springboot-eureka
-
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
 eureka:   #注册中心
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true  #以IP地址注册到服务中心，相互注册使用IP地址
     leaseRenewalIntervalInSeconds: 3 #加速心跳
     ip-address: localhost
-    health-check-url-path: /actuator/health
+    health-check-url-path: /actuator/health  #健康检测
   client:
     registerWithEureka: false
     fetchRegistry: false
