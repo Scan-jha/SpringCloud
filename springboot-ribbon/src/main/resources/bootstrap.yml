@@ -7,7 +7,7 @@ spring:
     active: dev
 ---
 spring:
-  profiles: dev
+  profiles: dev  #测试环境
 eureka:   #注册服务
   instance:
     lease-renewal-interval-in-seconds: 10
