@@ -10,10 +10,6 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521/ORCL
     username: scott
     password: oracle11g
-mybatis:  #mybatis
-  mapper-locations: classpath:com/springboot/springbootmybatis/dao/*.xml
-  config-location=classpath: classpath:mybatis-config.xml
-  type-aliases-package: com.springboot.springbootmybatis.entity
 ---
 spring:
   profiles: dev

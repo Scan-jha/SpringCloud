@@ -2,6 +2,7 @@ package com.springboot.springbootmybatis.dao;
 
 import com.springboot.springbootmybatis.entity.Emp;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,5 +11,6 @@ import java.util.List;
 @Repository
 public interface IEmpDao {
     //查询所有员工信息
-  public List<Emp> allEmp(Emp emp);
+   @Select("select * from dept,emp where dept.deptno=emp.deptno")
+   public List<Emp> allEmp(Emp emp);
 }

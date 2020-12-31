@@ -1,13 +1,14 @@
 package com.springboot.springbootmybatis.dao;
 
 import com.springboot.springbootmybatis.entity.Dept;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Mapper
-@Repository
+@Transactional
 public interface IDeptDao {
 
     /**
@@ -15,26 +16,32 @@ public interface IDeptDao {
      * @param dept
      * @return
      */
-    public List<Dept> selectDeptList(Dept dept);
+    @Select("select * from dept")
+    List<Dept> selectDeptList(Dept dept);
 
     /**
      * 根据部门编号查询部门信息
      * @param dept
      * @return
      */
-    public Dept selectDeptById(Dept deptno);
+    @Select("select * from dept where deptno=#{deptno}")
+    Dept selectDeptById(Dept deptno);
 
     /**
      * 添加
      * @param dept
      */
-    public void insertDept(Dept dept);
+    @Insert("insert into dept(deptno,dname,loc) values(#{deptno},#{dname},#{loc})")
+    void insertDept(Dept dept);
 
     /**
      * 更新
      * @param dept
      */
-    public void updateDept(Dept dept);
-   public void deleteDeptById(int deptno);
+    @Update("update dept set dname=#{dname},loc=#{loc} where deptno=#{deptno}")
+    void updateDept(Dept dept);
+
+    @Delete("delete from dept where deptno=#{deptno}")
+    void deleteDeptById(int deptno);
 
 }
