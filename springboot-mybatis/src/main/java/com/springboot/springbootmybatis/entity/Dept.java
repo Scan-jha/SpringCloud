@@ -1,5 +1,6 @@
 package com.springboot.springbootmybatis.entity;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 @ApiModel("部门信息")
+@TableName(value = "dept")
 public class Dept implements Serializable {
     @ApiModelProperty("部门编号")
     private int deptno;

@@ -1,9 +1,11 @@
 package com.springboot.springbootmybatis.entity;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("员工信息")
+@TableName(value = "emp")
 public class Emp {
     @ApiModelProperty("员工编号")
     private int empno;
